@@ -10,6 +10,8 @@ import (
 const template = `<!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="public/css/main.css">
+		<script src="public/js/main.js"></script>
 	</head>
 	<body>
 		<h2>Thanks for visiting my path %q</h2>
@@ -20,6 +22,10 @@ const template = `<!DOCTYPE html>
 // main function runs the app
 func main() {
 	port := ":3000"
+
+	fs := http.FileServer(http.Dir("./public"))
+	http.Handle("/public/", http.StripPrefix("/public/", fs))
+
 	http.HandleFunc("/", root)
 	fmt.Printf("Starting server on port %s\n", port)
 	panic(http.ListenAndServe(port, nil))
