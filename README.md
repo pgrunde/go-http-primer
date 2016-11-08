@@ -37,3 +37,7 @@ So one cool thing to know about Go is that is has an [awesome standard library o
 ### Serve up files
 
 Responding with a static template is all well and good, but what if I want to serve up some files? [Check out the directory of served files](https://github.com/gSchool/go-http/tree/6c0de34c4ec6538768679e4c680d82ab08427d53) we added here. Now I've got my HTML, my CSS, and my JavaScript all together. [Hot dog](http://www.kimballstock.com/pix/DOG/05/DOG_05_RK0084_05_P.JPG). 
+
+### Insert your values here
+
+Now [we've added templates as proper html files](https://github.com/gSchool/go-http/tree/37d86a62cf4bb8299dbd4f555c9e33f5f99d9e31). We're still just doing string interpolation, but now the templates live in their own happy home.
