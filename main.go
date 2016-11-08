@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html"
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -22,6 +24,7 @@ func main() {
 
 	http.HandleFunc("/", root)
 	http.HandleFunc("/makepost", makeyPosty)
+	http.HandleFunc("/api/json", jsonResponse)
 	fmt.Printf("Starting server on port %s\n", port)
 	panic(http.ListenAndServe(port, nil))
 
@@ -56,4 +59,27 @@ func makeyPosty(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.NotFound(w, r)
 	}
+}
+
+func jsonResponse(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Content-Type", "application/json; charset=utf-8")
+	funObject := struct {
+		Name            string
+		Age             int            `json:"age"`
+		FavoriteSubmits map[string]int // a map object whose keys are strings and values are integers
+	}{
+		Name: "Cooper Lee Joergens",
+		Age:  0,
+		FavoriteSubmits: map[string]int{
+			"twitter": 10,
+			"slack":   45,
+			"Denver Posts comments section": 120,
+		},
+	}
+	body, err := json.Marshal(funObject)
+	if err != nil {
+		log.Panicf("api: could not JSON encode response: %s", err)
+	}
+	w.Write(body)
+	return
 }
