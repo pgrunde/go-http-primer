@@ -32,4 +32,8 @@ So one cool thing to know about Go is that is has an [awesome standard library o
 
 ### The first response
 
-[Here on this commit](https://github.com/gSchool/go-http/tree/7865f5199c47bce852ff45f01050116796ed5153) we can see the beginning of a baby server, just born into the world and learning to respond to requests. Express users might recognize the format of an incoming request and an outgoing response. Babies might recognize some of the letters (if they're really bright and have good eyes). Either way, [congratulations on your first Go web app!](https://s-media-cache-ak0.pinimg.com/736x/e8/f6/85/e8f68586c05e9c608bf08efa1daeb752.jpg)
+[Here on this commit](https://github.com/gSchool/go-http/tree/7865f5199c47bce852ff45f01050116796ed5153) we can see the beginning of a baby server, just born into the world and learning to respond to requests. Express users might recognize the format of an incoming request and an outgoing response. Babies might recognize some of the letters (if they're really bright and have good eyes). Either way, [congratulations on your first Go web app!](https://s-media-cache-ak0.pinimg.com/736x/e8/f6/85/e8f68586c05e9c608bf08efa1daeb752.jpg) Execute the program with `go run main.go`.
+
+### Serve up files
+
+Responding with a static template is all well and good, but what if I want to serve up some files? [Check out the directory of served files](https://github.com/gSchool/go-http/tree/6c0de34c4ec6538768679e4c680d82ab08427d53) we added here. Now I've got my HTML, my CSS, and my JavaScript all together. [Hot dog](http://www.kimballstock.com/pix/DOG/05/DOG_05_RK0084_05_P.JPG). 
