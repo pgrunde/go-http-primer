@@ -51,6 +51,9 @@ The incoming request has all the goodies you need to bag yourself some URL param
 
 Now I've gone and [shown you what a form post might look like](https://github.com/gSchool/go-http/tree/a5afcadb95994d04a8dcd943e20048ea4c7ceb20) (also notice I remembered to run [go fmt](https://blog.golang.org/go-fmt-your-code) this time). While I'm only having the server print out the form values, I bet you could imagine a website where they did other things. Think of something else you submit to a website? Which thing you submit is your faaaaavorite thing? I should mention that the pattern you're seeing here where I switch on the request method to determine actions taken is a very simple way to solve the muxing problem. There are tools out there which you can use to solve this problem more elegantly like Naoya Inada's [denco](https://github.com/naoina/denco) or Julien Schmidt's [httprouter](https://github.com/julienschmidt/httprouter).
 
+### JavaScript Object Notation Nation
+
+It is super practical to serve up information from a server that comes in a JSON payload, and [here we can see just that](https://github.com/gSchool/go-http/tree/4161b77a21ba6d3cd444ae26e56abe6ca7ab19ae). Structs and Maps are all hunky-dory when it comes to JSON marshalling. See if you can't swap out the `json.Marshal` call and replace it with a [Decoder](https://golang.org/pkg/encoding/json/#Decoder) type that decodes the JSON.
+
 Well that's it for now- if you need a quick reference I've found [Go By Example](https://gobyexample.com/) to be an invaluable resource for remembering how to do things. 
 
-###### For a challenge, see if you can't figure out how to respond to a request with the JSON format, proper header and all!
