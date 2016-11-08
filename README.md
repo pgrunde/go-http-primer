@@ -41,3 +41,8 @@ Responding with a static template is all well and good, but what if I want to se
 ### Insert your values here
 
 Now [we've added templates as proper html files](https://github.com/gSchool/go-http/tree/37d86a62cf4bb8299dbd4f555c9e33f5f99d9e31). We're still just doing string interpolation, but now the templates live in their own happy home.
+
+### What about those other URL values?
+
+The incoming request has all the goodies you need to bag yourself some URL parameters [in this example](https://github.com/gSchool/go-http/tree/a000ec3b94f3d2fdf8064c1f063c2fe6cc3fbaf1). Now you can specify things like `?color=%234e73c0` or `?color=blue` if you're feeling retro. So far I'm only choosing to render my path and params, but you [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) assured you can make all kinds of delicious decisions out of the combinations of those two things.
+
