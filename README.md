@@ -29,3 +29,7 @@ Thing | Go | JS
 ## Simple Server
 
 So one cool thing to know about Go is that is has an [awesome standard library of packages](https://golang.org/pkg/) and a built in [HTTP package](https://golang.org/pkg/net/http/) that includes its own [testing toolkit](https://golang.org/pkg/net/http/httptest/). That toolkit is used with Go's built in [testing framework](https://golang.org/pkg/testing/). Were going to build an example web app with that HTTP package.
+
+### The first response
+
+[Here on this commit](https://github.com/gSchool/go-http/tree/7865f5199c47bce852ff45f01050116796ed5153) we can see the beginning of a baby server, just born into the world and learning to respond to requests. Express users might recognize the format of an incoming request and an outgoing response. Babies might recognize some of the letters (if they're really bright and have good eyes). Either way, [congratulations on your first Go web app!](https://s-media-cache-ak0.pinimg.com/736x/e8/f6/85/e8f68586c05e9c608bf08efa1daeb752.jpg)
