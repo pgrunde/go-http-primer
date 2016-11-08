@@ -46,3 +46,7 @@ Now [we've added templates as proper html files](https://github.com/gSchool/go-h
 
 The incoming request has all the goodies you need to bag yourself some URL parameters [in this example](https://github.com/gSchool/go-http/tree/a000ec3b94f3d2fdf8064c1f063c2fe6cc3fbaf1). Now you can specify things like `?color=%234e73c0` or `?color=blue` if you're feeling retro. So far I'm only choosing to render my path and params, but you [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) assured you can make all kinds of delicious decisions out of the combinations of those two things.
 
+
+### Make Posts, Not War
+
+Now I've gone and [shown you what a form post might look like](https://github.com/gSchool/go-http/tree/a5afcadb95994d04a8dcd943e20048ea4c7ceb20) (also notice I remembered to run [go fmt](https://blog.golang.org/go-fmt-your-code) this time). While I'm only having the server print out the form values, I bet you could imagine a website where they did other things. Think of something else you submit to a website? Which thing you submit is your faaaaavorite thing?
