@@ -8,8 +8,8 @@ import (
 )
 
 type Home struct {
-	Path string
-	Name string
+	Path  string
+	Name  string
 	Color string
 }
 
@@ -21,6 +21,7 @@ func main() {
 	http.Handle("/public/", http.StripPrefix("/public/", fs))
 
 	http.HandleFunc("/", root)
+	http.HandleFunc("/makepost", makeyPosty)
 	fmt.Printf("Starting server on port %s\n", port)
 	panic(http.ListenAndServe(port, nil))
 
@@ -34,11 +35,25 @@ func root(w http.ResponseWriter, r *http.Request) {
 		color = "black"
 	}
 	data := Home{
-		Path: html.EscapeString(r.URL.Path),
-		Name: "Grunde",
+		Path:  html.EscapeString(r.URL.Path),
+		Name:  "Grunde",
 		Color: color,
 	}
 	t, _ := template.ParseFiles("templates/home.html")
 	t.Execute(w, data)
 	return
+}
+
+func makeyPosty(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		http.ServeFile(w, r, "templates/makeyposty.html")
+	case "POST":
+		r.ParseForm()
+		fmt.Println(r.Form["name"][0])
+		fmt.Println(r.Form["email"][0])
+		http.ServeFile(w, r, "templates/makeyposty.html")
+	default:
+		http.NotFound(w, r)
+	}
 }
