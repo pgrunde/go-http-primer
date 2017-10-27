@@ -7,23 +7,45 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 type Home struct {
 	Path  string
 	Name  string
 	Color string
+	Deets []Deet
+}
+
+type Deet struct {
+	gorm.Model
+	Name string
+	Email string
+}
+
+type App struct {
+	DB *gorm.DB
 }
 
 // main function runs the app
 func main() {
 	port := ":3000"
 
+	db, err := gorm.Open("sqlite3", "/tmp/gorm.db")
+	if err != nil {
+		log.Panic(err)
+	}
+	defer db.Close()
+	db.AutoMigrate(&Deet{})
+	a := &App{DB: db}
+
 	fs := http.FileServer(http.Dir("./public"))
 	http.Handle("/public/", http.StripPrefix("/public/", fs))
 
-	http.HandleFunc("/", root)
-	http.HandleFunc("/makepost", makeyPosty)
+	http.HandleFunc("/", a.root)
+	http.HandleFunc("/makepost", a.makeyPosty)
 	http.HandleFunc("/api/json", jsonResponse)
 	fmt.Printf("Starting server on port %s\n", port)
 	panic(http.ListenAndServe(port, nil))
@@ -31,23 +53,26 @@ func main() {
 }
 
 // root is the handler function, it tells me what to do when a user visits root
-func root(w http.ResponseWriter, r *http.Request) {
+func (a *App) root(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("content-type", "text/html; charset=utf-8")
 	color := r.URL.Query().Get("color")
 	if color == "" {
 		color = "black"
 	}
+	var Deets []Deet
+	a.DB.Find(&Deets)
 	data := Home{
 		Path:  html.EscapeString(r.URL.Path),
 		Name:  "Grunde",
 		Color: color,
+		Deets: Deets,
 	}
 	t, _ := template.ParseFiles("templates/home.html")
 	t.Execute(w, data)
 	return
 }
 
-func makeyPosty(w http.ResponseWriter, r *http.Request) {
+func (a *App) makeyPosty(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		http.ServeFile(w, r, "templates/makeyposty.html")
@@ -55,7 +80,8 @@ func makeyPosty(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		fmt.Println(r.Form["name"][0])
 		fmt.Println(r.Form["email"][0])
-		http.ServeFile(w, r, "templates/makeyposty.html")
+		a.DB.Create(&Deet{Name: r.Form["name"][0], Email: r.Form["email"][0]})
+		http.Redirect(w, r, "/", http.StatusFound)
 	default:
 		http.NotFound(w, r)
 	}

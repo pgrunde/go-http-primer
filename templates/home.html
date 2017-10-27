@@ -7,5 +7,10 @@
 	<body>
     <h2>Thanks for visiting my <span style="color:{{.Color}}">path</span> {{.Path}}, {{.Name}}</h2>
     <a href="/makepost">Click to send the Internet your details</a>
+    <ul>
+      {{ range .Deets }}
+      <li>{{.Name}} - {{.Email}}</li>
+      {{ end }}
+    </ul>
 	</body>
 </html>
